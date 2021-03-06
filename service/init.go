@@ -1,10 +1,8 @@
 package service
 
 import (
-	"fmt"
-	"log"
-
 	"github.com/go-xorm/xorm"
+	"github.com/r-hata/sample-api/logger"
 	"github.com/r-hata/sample-api/model"
 	"xorm.io/core"
 )
@@ -18,14 +16,14 @@ func init() {
 	var err error
 	dbEngine, err = xorm.NewEngine(driverName, dsName)
 	if err != nil {
-		log.Fatal(err.Error())
+		logger.Fatal(err.Error())
 	}
 	dbEngine.ShowSQL(true)
 	dbEngine.SetMapper(core.GonicMapper{})
 	dbEngine.SetMaxOpenConns(2)
 	err = dbEngine.Sync2(new(model.Book))
 	if err != nil {
-		log.Fatal(err.Error())
+		logger.Fatal(err.Error())
 	}
-	fmt.Println("init data base ok")
+	logger.Info("init data base ok")
 }

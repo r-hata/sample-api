@@ -4,10 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/r-hata/sample-api/controller"
+	"github.com/r-hata/sample-api/logger"
 	"github.com/r-hata/sample-api/middleware"
 )
 
 func main() {
+	defer logger.Sync()
 	router := gin.Default()
 	// Middleware
 	router.Use(middleware.RecordUaAndTime)

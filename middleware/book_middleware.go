@@ -1,18 +1,14 @@
 package middleware
 
 import (
-	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/r-hata/sample-api/logger"
 	"go.uber.org/zap"
 )
 
 func RecordUaAndTime(c *gin.Context) {
-	logger, err := zap.NewProduction()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
 	startTime := time.Now()
 	ua := c.GetHeader("User-Agent")
 	c.Next()
