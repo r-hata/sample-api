@@ -7,7 +7,7 @@ import (
 type BookService struct{}
 
 func (BookService) Add(book *model.Book) error {
-	_, err := dbEngine.Insert(book)
+	_, err := dbEngine.InsertOne(book)
 	if err != nil {
 		return err
 	}

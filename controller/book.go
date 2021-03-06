@@ -26,6 +26,7 @@ func BookAdd(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{
 		"status": "ok",
+		"data":   book,
 	})
 }
 
