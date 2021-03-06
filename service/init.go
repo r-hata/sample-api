@@ -8,19 +8,22 @@ import (
 	"github.com/r-hata/sample-api/model"
 )
 
-var DbEngine *xorm.Engine
+var dbEngine *xorm.Engine
 
 func init() {
 	driverName := "mysql"
-	DsName := "root:root@(10.0.2.15:3306)/gin?charset=utf8"
+	dsName := "gin:gin123@tcp([127.0.0.1]:3306)/gin?charset=utf8"
 
 	var err error
-	DbEngine, err = xorm.NewEngine(driverName, DsName)
+	dbEngine, err = xorm.NewEngine(driverName, dsName)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	DbEngine.ShowSQL(true)
-	DbEngine.SetMaxOpenConns(2)
-	DbEngine.Sync2(new(model.Book))
+	dbEngine.ShowSQL(true)
+	dbEngine.SetMaxOpenConns(2)
+	err = dbEngine.Sync2(new(model.Book))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 	fmt.Println("init data base ok")
 }

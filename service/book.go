@@ -7,7 +7,7 @@ import (
 type BookService struct{}
 
 func (BookService) Add(book *model.Book) error {
-	_, err := DbEngine.Insert(book)
+	_, err := dbEngine.Insert(book)
 	if err != nil {
 		return err
 	}
@@ -17,7 +17,7 @@ func (BookService) Add(book *model.Book) error {
 
 func (BookService) List() []model.Book {
 	books := make([]model.Book, 0)
-	err := DbEngine.Distinct("id", "title", "content").Limit(10, 0).Find(&books)
+	err := dbEngine.Distinct("id", "title", "content").Limit(10, 0).Find(&books)
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +26,7 @@ func (BookService) List() []model.Book {
 }
 
 func (BookService) Update(book *model.Book) error {
-	_, err := DbEngine.Id(book.ID).Update(book)
+	_, err := dbEngine.Id(book.Id).Update(book)
 	if err != nil {
 		return err
 	}
@@ -36,7 +36,7 @@ func (BookService) Update(book *model.Book) error {
 
 func (BookService) Delete(id int) error {
 	book := new(model.Book)
-	_, err := DbEngine.Id(id).Delete(book)
+	_, err := dbEngine.Id(id).Delete(book)
 	if err != nil {
 		return err
 	}

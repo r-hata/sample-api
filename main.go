@@ -17,7 +17,7 @@ func main() {
 		v1.POST("/books", controller.BookAdd)
 		v1.GET("/books", controller.BookList)
 		v1.PUT("/books", controller.BookUpdate)
-		v1.DELETE("/books", controller.BookDelete)
+		v1.DELETE("/books/:id", controller.BookDelete)
 	}
 	router.Run()
 }

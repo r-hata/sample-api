@@ -57,7 +57,7 @@ func BookUpdate(c *gin.Context) {
 }
 
 func BookDelete(c *gin.Context) {
-	id := c.PostForm("id")
+	id := c.Param("id")
 	intID, err := strconv.ParseInt(id, 10, 0)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Bad Request")
