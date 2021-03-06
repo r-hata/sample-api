@@ -15,6 +15,7 @@ func main() {
 	v1 := router.Group("/v1")
 	{
 		v1.POST("/books", controller.BookAdd)
+		v1.GET("/books/:id", controller.BookGet)
 		v1.GET("/books", controller.BookList)
 		v1.PUT("/books", controller.BookUpdate)
 		v1.DELETE("/books/:id", controller.BookDelete)

@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-xorm/xorm"
 	"github.com/r-hata/sample-api/model"
+	"xorm.io/core"
 )
 
 var dbEngine *xorm.Engine
@@ -20,6 +21,7 @@ func init() {
 		log.Fatal(err.Error())
 	}
 	dbEngine.ShowSQL(true)
+	dbEngine.SetMapper(core.GonicMapper{})
 	dbEngine.SetMaxOpenConns(2)
 	err = dbEngine.Sync2(new(model.Book))
 	if err != nil {

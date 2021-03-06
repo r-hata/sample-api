@@ -30,6 +30,31 @@ func BookAdd(c *gin.Context) {
 	})
 }
 
+func BookGet(c *gin.Context) {
+	id := c.Param("id")
+	intID, err := strconv.ParseInt(id, 10, 0)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Bad Request")
+		return
+	}
+
+	bookService := service.BookService{}
+	has, book, err := bookService.Get(int(intID))
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Internal Server Error")
+		return
+	}
+	if !has {
+		c.String(http.StatusNotFound, "Not Found")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+		"data":   book,
+	})
+}
+
 func BookList(c *gin.Context) {
 	bookService := service.BookService{}
 	list := bookService.List()

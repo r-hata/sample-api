@@ -15,6 +15,15 @@ func (BookService) Add(book *model.Book) error {
 	return nil
 }
 
+func (BookService) Get(id int) (bool, *model.Book, error) {
+	book := new(model.Book)
+	has, err := dbEngine.Distinct("id", "title", "content").Where("id = ?", id).Get(book)
+	if err != nil {
+		return has, nil, err
+	}
+	return has, book, nil
+}
+
 func (BookService) List() []model.Book {
 	books := make([]model.Book, 0)
 	err := dbEngine.Distinct("id", "title", "content").Limit(10, 0).Find(&books)
@@ -26,7 +35,7 @@ func (BookService) List() []model.Book {
 }
 
 func (BookService) Update(book *model.Book) error {
-	_, err := dbEngine.Id(book.Id).Update(book)
+	_, err := dbEngine.Id(book.ID).Update(book)
 	if err != nil {
 		return err
 	}
