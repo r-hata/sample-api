@@ -1,0 +1,6 @@
+#!/bin/bash
+appPID=`pgrep sample-api`
+if [[ -n  $appPID ]]; then
+	kill -9 $appPID
+fi
+

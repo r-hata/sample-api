@@ -1,0 +1,16 @@
+#!/bin/bash
+install_go()
+{
+	curl -O https://dl.google.com/go/go1.16.linux-amd64.tar.gz
+	tar -C /usr/local -xf go1.16.linux-amd64.tar.gz
+	echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bash_profile
+	yum install -y git mercurial subversion
+	echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bash_profile
+	source ~/.bash_profile
+}
+
+if !(type "go" > /dev/null 2>&1); then
+	install_go
+fi
+
+export GIN_MODE=release
