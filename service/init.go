@@ -11,7 +11,7 @@ var dbEngine *xorm.Engine
 
 func init() {
 	driverName := "mysql"
-	dsName := "gin:gin123@tcp([127.0.0.1]:3306)/gin?charset=utf8"
+	dsName := "gin:gin123@tcp([mysql.server]:3306)/gin?charset=utf8"
 
 	var err error
 	dbEngine, err = xorm.NewEngine(driverName, dsName)

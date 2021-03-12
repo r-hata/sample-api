@@ -12,5 +12,8 @@ install_go()
 if !(type "go" > /dev/null 2>&1); then
 	install_go
 fi
+if !(type "mysql" > /dev/null 2>&1); then
+	yum install -y mysql
+fi
 
 export GIN_MODE=release
